@@ -1,29 +1,26 @@
 import discord
+from discord.ext import commands
+from list import fun_facts
 import os
 import random
 
-bot = discord.Client()
-action_symbol = '*'
+client = commands.Bot(command_prefix='!')
+    
+@client.event
+async def on_ready():
+    print('Bot ready')
 
-def funFact():
-    fact = random.randint(0, 1)
-    if fact == 0:
-        return 'AHHHHH!'
-    elif fact == 1:
-        return ':flushed:'
+@client.command()
+async def funfact(ctx):
+    fact = random.randint(0, len(fun_facts)-1)
+    await ctx.send('Did you know:\n' + fun_facts[fact])
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
+@client.command()
+async def wow(ctx):
+    await ctx.send('https://tenor.com/view/owen-wilson-owen-wilson-amazing-wonderful-gif-6103373')
 
-    if message.content == (action_symbol + 'hello'):
-        await message.channel.send('Hello!')
-        
-    if message.content == (action_symbol + 'wow'):
-        await message.channel.send('https://tenor.com/view/owen-wilson-owen-wilson-amazing-wonderful-gif-6103373')
+@client.command()
+async def ping(ctx):
+    await ctx.send('My ping is ' + str(round(client.latency * 1000)) + 'ms')   
 
-    if message.content == (action_symbol + 'funFact'):
-        await message.channel.send(funFact())
-
-bot.run(os.getenv('TOKEN'))
+client.run(os.getenv('TOKEN'))
