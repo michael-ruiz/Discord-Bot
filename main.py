@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from list import fun_facts
+from corona import corona
 import os
 import random
 
@@ -10,7 +11,7 @@ client = commands.Bot(command_prefix='!')
 async def on_ready():
     print('Bot ready')
 
-@client.command()
+@client.command(aliases=['ff', 'didyouknow', 'dyk'])
 async def funfact(ctx):
     fact = random.randint(0, len(fun_facts)-1)
     await ctx.send('Did you know:\n' + fun_facts[fact])
@@ -21,6 +22,10 @@ async def wow(ctx):
 
 @client.command()
 async def ping(ctx):
-    await ctx.send('My ping is ' + str(round(client.latency * 1000)) + 'ms')   
+    await ctx.send('My ping is ' + str(round(client.latency * 1000)) + 'ms')
+
+@client.command(aliases=['corona', 'COVID'])
+async def covid(ctx):
+    await ctx.send('```' + corona() + '```')
 
 client.run(os.getenv('TOKEN'))
