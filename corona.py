@@ -1,11 +1,11 @@
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 def corona():
     options = Options()
     options.headless = True
-    browser = webdriver.Chrome(ChromeDriverManager().install(), options=options) # Seeing how to have an environment variable
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     browser.get('https://health-infobase.canada.ca/covid-19/epidemiological-summary-covid-19-cases.html')
     cad_case_num = browser.find_element_by_xpath('//*[@id="newCases"]/tbody/tr[1]/td[2]').text
     ont_case_num = browser.find_element_by_xpath('//*[@id="newCases"]/tbody/tr[6]/td[2]').text
