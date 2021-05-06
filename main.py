@@ -1,9 +1,10 @@
 import discord
+import os
+import random
 from discord.ext import commands
 from list import fun_facts
 from corona import corona
-import os
-import random
+from img_search import search
 
 client = commands.Bot(command_prefix='!')
     
@@ -27,5 +28,10 @@ async def ping(ctx):
 @client.command(aliases=['corona', 'COVID'])
 async def covid(ctx):
     await ctx.send('```' + corona() + '```')
+
+@client.command(aliases=['ps'])
+async def picsearch(ctx, arg):
+    search(arg)
+    await ctx.send('Here is the first image that comes up:', file=discord.File('SEARCH_IMG.png'))
 
 client.run(os.getenv('TOKEN'))
