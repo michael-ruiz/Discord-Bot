@@ -5,7 +5,10 @@ from discord.ext import commands
 from list import fun_facts
 from corona import corona
 from img_search import search
+from twitter_bot import send_tweet
 
+all_keys = open('keys.txt', 'r').read().splitlines()
+discord_bot_token = all_keys[4]
 client = commands.Bot(command_prefix='!')
 client.remove_command('help')
     
@@ -36,6 +39,11 @@ async def picsearch(ctx, arg):
     await ctx.send('Here is the first image that comes up:', file=discord.File('SEARCH_IMG.png'))
 
 @client.command()
+async def tweet(ctx, arg):
+    send_tweet(arg)
+    await ctx.send('Tweet Sent at\n https://twitter.com/hell0hell0hello')
+
+@client.command()
 async def help(ctx):
     help = discord.Embed(title='Help', url='https://www.youtube.com/watch?v=dQw4w9WgXcQ', description="Below is a list of all of this bot's commands", color=0x4287f5)
     help.set_thumbnail(url='https://www.oxigeno.fm/wp-content/uploads/2015/10/Ayudame-470X310-436x291.jpg')
@@ -48,4 +56,4 @@ async def help(ctx):
     help.set_footer(text='Thanks for listening to my TEDTalk')
     await ctx.send(embed = help)
 
-client.run(os.getenv('TOKEN'))
+client.run(discord_bot_token)

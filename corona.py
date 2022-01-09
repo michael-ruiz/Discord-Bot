@@ -12,7 +12,7 @@ def corona():
 
     browser.get('https://app.powerbi.com/view?r=eyJrIjoiMzE5MzJlOTItOWE2ZS00MDNlLTlkNDEtMTcyYTg5OGFhMTFiIiwidCI6ImRjNTYxMjk1LTdjYTktNDFhOS04M2JmLTUwODM0ZDZhOWQwZiJ9')
     lon_case_num = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[25]/transform/div/div[3]/div/visual-modern/div/div/div/p/span').text
-
+                                          
     browser.quit()
 
     print_title = 'COVID-19 Cases\n'
