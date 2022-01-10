@@ -1,11 +1,10 @@
 import discord
-import os
 import random
 from discord.ext import commands
 from list import fun_facts
 from corona import corona
 from img_search import search
-from twitter_bot import send_tweet
+import twitter_bot
 
 all_keys = open('keys.txt', 'r').read().splitlines()
 discord_bot_token = all_keys[4]
@@ -40,8 +39,13 @@ async def picsearch(ctx, arg):
 
 @client.command()
 async def tweet(ctx, arg):
-    send_tweet(arg)
+    twitter_bot.send_tweet(arg)
     await ctx.send('Tweet Sent at\n https://twitter.com/hell0hell0hello')
+
+@client.command(aliases=['ud', 'updes'])
+async def updatedescription(ctx, arg):
+    twitter_bot.update_profile_description(arg)
+    await ctx.send('Description Updated at\n https://twitter.com/hell0hell0hello')
 
 @client.command()
 async def help(ctx):

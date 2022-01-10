@@ -14,3 +14,6 @@ api = tweepy.API(authenticator, wait_on_rate_limit=True)
 
 def send_tweet(message):
     api.update_status(message)
+
+def update_profile_description(new_description):
+    api.update_profile(desription=new_description)
