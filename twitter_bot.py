@@ -16,4 +16,4 @@ def send_tweet(message):
     api.update_status(message)
 
 def update_profile_description(new_description):
-    api.update_profile(desription=new_description)
+    api.update_profile(description=new_description)
